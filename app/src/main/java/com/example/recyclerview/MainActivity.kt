@@ -1,6 +1,7 @@
 package com.example.recyclerview
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerview.databinding.ActivityMainBinding
@@ -17,7 +18,10 @@ class MainActivity : AppCompatActivity() {
     private fun init(){
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = Adapter(list)
+        adapter = Adapter(list, itemClick = {
+//            val itemClick = list.get(it).name
+            Toast.makeText(this, "Item is Clicked ", Toast.LENGTH_SHORT).show()
+        })
         recyclerView.adapter = adapter
 
     }
