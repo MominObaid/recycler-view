@@ -7,26 +7,26 @@ import com.example.recyclerview.databinding.ItemViewBinding
 
 class Adapter(
     val list: List<ItemViewModel>,
-    private val itemClick: () -> Unit
+    private val listeners: Listeners,
     ):RecyclerView.Adapter<Adapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(
         val binding: ItemViewBinding,
-        private val itemClick: () -> Unit
+        private val listeners: Listeners,
         ): RecyclerView.ViewHolder(binding.root) {
 
        fun bindItemView(model: ItemViewModel){
            binding.itemviewText1.text = model.name
            binding.itemviewText2.text = model.message
            binding.root.setOnClickListener{
-               itemClick.invoke()
+               listeners.onItemClick(position)
            }
        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflate = ItemViewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return ItemViewHolder(inflate, itemClick)
+        return ItemViewHolder(inflate, listeners)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerview.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),Listeners {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: Adapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +18,7 @@ class MainActivity : AppCompatActivity() {
     private fun init(){
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = Adapter(list, itemClick = {
-//            val itemClick = list.get(it).name
-            Toast.makeText(this, "Item is Clicked ", Toast.LENGTH_SHORT).show()
-        })
+        adapter = Adapter(list,this)
         recyclerView.adapter = adapter
 
     }
@@ -54,4 +51,8 @@ class MainActivity : AppCompatActivity() {
         ItemViewModel("User 25","You may have a new message"),
         ItemViewModel("User 26","You may have a new message"),
         )
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this, "Clicked ${position.plus(1)}", Toast.LENGTH_SHORT).show()
+    }
 }
