@@ -1,5 +1,5 @@
 package com.example.recyclerview
 
 interface Listeners {
-    fun onItemClick(position: Int)
+    fun onItemClick(it : Int)
 }

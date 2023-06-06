@@ -30,7 +30,7 @@ class Adapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bindItemView(list.get(position))
+        holder.bindItemView(list[position])
     }
 
     override fun getItemCount(): Int {
